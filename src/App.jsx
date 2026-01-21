@@ -14,6 +14,7 @@ import ContextUserInfoProvider from "./Context/ContextUserInfo";
 import toast, { Toaster } from 'react-hot-toast';
 import DeletePost from "./components/DeletePost/DeletePost";
 import ProtectProject from "./components/ProtectProject/ProtectProject";
+import NotFound from "./components/NotFound/NotFound";
 
 let query = new QueryClient();
 
@@ -39,6 +40,7 @@ let router = createBrowserRouter([
           <SinglePost /> 
         </ProtectProject>
       },
+    {path:'*' , element:<NotFound/>}
        
      
     ],
