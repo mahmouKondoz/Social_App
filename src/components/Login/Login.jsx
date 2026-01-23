@@ -121,7 +121,7 @@ let {register,handleSubmit,formState} = form
 
         <div className="relative z-0 w-full mb-5 group my-9">
          {
-          passwordValue ?  <span onClick={()=>{setShowpass(!showPass)}}><i class={`fa-solid ${showPass ? "fa-eye":"fa-eye-slash"} absolute start-100 top-2`}></i></span>  : ""
+          passwordValue ?  <span onClick={()=>{setShowpass(!showPass)}}><i class={`fa-solid ${showPass ? "fa-eye":"fa-eye-slash"} absolute start-80 lg:start-100 p-2`}></i></span>  : ""
          }
           <input
             type={showPass ? "text" : "password"}
