@@ -43,69 +43,72 @@ export default function Home() {
     </div>}
     {isLoading ? '' : <AddPost/>}
   {data?.map((post)=>{
-    return<div key={post.id} className='gap-5'>
-      
-      
-       <div className='w-[50%] mx-auto mb-7 shadow-2xl shadow-black p-7 rounded-4xl '>
-        <Link to={`profile`}>
-        
-        
-        <div className='flex gap-3 items-center'>
+    return<div key={post.id} className="px-3 sm:px-0">
+  <div className="w-full md:w-[80%] lg:w-[50%] mx-auto mb-7 shadow-2xl shadow-black p-4 sm:p-6 lg:p-7 rounded-3xl">
+
+    <Link to="profile">
+      <div className="flex gap-3 items-center">
+        <img
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+          src={post.user.photo}
+          alt=""
+        />
+
         <div>
-          <img className='size-13 rounded-full ' src={post.user.photo} alt=''></img>
-        </div>
-        <div>
-          <div>
-            <p className='font-bold'>{post.user.name}</p>
-            <p className='text-sm'>{new Date(post.createdAt).toLocaleDateString('en-us' , {
-              year:'numeric' ,
-              month:"short" ,
-              day:"numeric"
-            }) }</p>
-          </div>
+          <p className="font-bold text-sm sm:text-base">
+            {post.user.name}
+          </p>
+          <p className="text-xs sm:text-sm text-gray-500">
+            {new Date(post.createdAt).toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </p>
         </div>
       </div>
-        
-        
-        </Link>
-        <div className='my-3 ms-3'>{post.body}</div>
-        <Link to={`/singlepost/${post.id}`}>
+    </Link>
 
-        <img className='w-full rounded-3xl' src = {post.image} alt='' ></img>
-        </Link>
+    <div className="my-3 text-sm sm:text-base">
+      {post.body}
+    </div>
 
-        <div>
-          <SingleCommet comment={post?.comments}/>
-        </div>
-      
+    <Link to={`/singlepost/${post.id}`}>
+      <img
+        className="w-full rounded-2xl object-cover max-h-[400px]"
+        src={post.image}
+        alt=""
+      />
+    </Link>
 
-      <div className='grid grid-cols-1 lg:grid-cols-3 justify-between not-visited:   shadow-2xl rounded-3xl  my-5'> 
-        <div className='flex cursor-pointer items-center gap-2 hover:bg-gray-300 rounded-3xl p-5 duration-500'>
-         
-          <AiFillLike size={25} />
-           <p className='text-sm'>Like</p>
-        </div>
-        <div className='flex cursor-pointer items-center gap-2  hover:bg-gray-300 rounded-3xl p-5 duration-500'>
-           
-         <Link to='/addcomment'>
+    <div className="mt-4">
+      <SingleCommet comment={post?.comments} />
+    </div>
 
-          <FaComment size={25} />
-         
-         </Link>
-          <p className='text-sm'>Comment</p>
-        </div>
-        <div className='flex cursor-pointer items-center gap-2  hover:bg-gray-300 rounded-3xl p-5 duration-500'>
-          
-          <FaShare size={25} />
-          <p className='text-sm'>Share</p>
-
-        </div>
+    <div className="grid grid-cols-3 gap-2 shadow-2xl rounded-3xl my-5">
+      <div className="flex cursor-pointer items-center justify-center gap-2 hover:bg-gray-300 rounded-3xl p-3 sm:p-5 duration-300">
+        <AiFillLike size={22} />
+        <p className="text-xs sm:text-sm">Like</p>
       </div>
-      <AddComment id={post?.id}/>
 
+      <Link
+        to="/addcomment"
+        className="flex cursor-pointer items-center justify-center gap-2 hover:bg-gray-300 rounded-3xl p-3 sm:p-5 duration-300"
+      >
+        <FaComment size={22} />
+        <p className="text-xs sm:text-sm">Comment</p>
+      </Link>
+
+      <div className="flex cursor-pointer items-center justify-center gap-2 hover:bg-gray-300 rounded-3xl p-3 sm:p-5 duration-300">
+        <FaShare size={22} />
+        <p className="text-xs sm:text-sm">Share</p>
+      </div>
     </div>
 
-    </div>
+    <AddComment id={post?.id} />
+
+  </div>
+</div>
    
     
     

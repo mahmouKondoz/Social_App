@@ -96,57 +96,84 @@ let {register,handleSubmit,formState} = form
   return <>
 
   
-    <form
-     onSubmit={handleSubmit(hangelRegister)}
-        className="max-w-md  mx-auto p-10 lg:p-0 "
+ <form
+  onSubmit={handleSubmit(hangelRegister)}
+  className="max-w-md mx-auto px-4 sm:px-6 lg:px-0 py-10"
+>
+ 
+  <div className="relative w-full mb-6">
+    <input
+      type="email"
+      {...register("email")}
+      id="email"
+      className="block w-full py-2.5 text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:ring-0 focus:border-sky-300 peer"
+      placeholder=" "
+    />
+    <label
+      htmlFor="email"
+      className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-black"
+    >
+      Enter your email
+    </label>
+    {formState.errors.email && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.email.message}
+      </p>
+    )}
+  </div>
+
+  
+  <div className="relative w-full mb-6">
+    {passwordValue && (
+      <button
+        type="button"
+        onClick={() => setShowpass(!showPass)}
+        className="absolute right-2 top-2 text-gray-500 hover:text-black"
       >
-       
+        <i
+          className={`fa-solid ${
+            showPass ? "fa-eye" : "fa-eye-slash"
+          }`}
+        ></i>
+      </button>
+    )}
 
-        <div className="relative z-0 w-full mb-5 group my-9">
-          <input
-            type="email"
-             {...register('email')}
-            id="email"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="email"
-            className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Enter Your email
-          </label>
-          {formState.errors.email ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.email.message}</p> : ""}
-        </div>
+    <input
+      type={showPass ? "text" : "password"}
+      {...register("password")}
+      id="password"
+      className="block w-full py-2.5 text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:ring-0 focus:border-sky-300 peer"
+      placeholder=" "
+    />
+    <label
+      htmlFor="password"
+      className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-black"
+    >
+      Enter your password
+    </label>
 
-        <div className="relative z-0 w-full mb-5 group my-9">
-         {
-          passwordValue ?  <span onClick={()=>{setShowpass(!showPass)}}><i class={`fa-solid ${showPass ? "fa-eye":"fa-eye-slash"} absolute start-80 lg:start-100 p-2`}></i></span>  : ""
-         }
-          <input
-            type={showPass ? "text" : "password"}
-           {...register('password')}
-            id="password"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="password"
-            className="absolute text-xs text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Enter your Password
-          </label>
-          {formState.errors.password ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.password.message}</p> : ""}
-        </div>
-        <button
+    {formState.errors.password && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.password.message}
+      </p>
+    )}
+  </div>
 
-        disabled={isloading}
-          type="submit"
-          className={`text-black hover:shadow-2xl shadow-black hover:scale-120 duration-500 bg-sky-300 box-border border border-transparent hover:bg-fg-yellow-strong focus:ring-4 focus:ring-yellow  -medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-non ${isloading?"cursor-not-allowed":"cursor-pointer"}`}
-        >
-        {isloading ? <i class="fa-solid fa-spinner fa-spin"></i> : "Submit"}
-        </button>
-      </form>
+  
+  <button
+    disabled={isloading}
+    type="submit"
+    className={`w-full sm:w-auto flex items-center justify-center gap-2 bg-sky-300 text-black rounded-lg px-6 py-2.5 font-medium duration-300 hover:scale-105 hover:shadow-xl ${
+      isloading ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+    }`}
+  >
+    {isloading ? (
+      <i className="fa-solid fa-spinner fa-spin"></i>
+    ) : (
+      "Submit"
+    )}
+  </button>
+</form>
   
   </>
 }

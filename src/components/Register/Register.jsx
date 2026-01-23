@@ -112,142 +112,180 @@ let {register,handleSubmit,formState} = form
   return <>
 
   
-    <form 
-     onSubmit={handleSubmit(hangelRegister)}
-        className="max-w-md  mx-auto p-10 lg:p-0 "
+   <form
+  onSubmit={handleSubmit(hangelRegister)}
+  className="max-w-md mx-auto px-4 sm:px-6 lg:px-0 py-10"
+>
+  
+  <div className="relative w-full mb-6">
+    <input
+      type="text"
+      {...register("name")}
+      id="name"
+      className="block w-full py-2.5 text-sm bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:border-sky-300 peer"
+      placeholder=" "
+    />
+    <label
+      htmlFor="name"
+      className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 origin-[0]
+      peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
+      peer-focus:-translate-y-6 peer-focus:scale-75"
+    >
+      Enter your name
+    </label>
+    {formState.errors.name && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.name.message}
+      </p>
+    )}
+  </div>
+
+  
+  <div className="relative w-full mb-6">
+    <input
+      type="email"
+      {...register("email")}
+      id="email"
+      className="block w-full py-2.5 text-sm bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:border-sky-300 peer"
+      placeholder=" "
+    />
+    <label
+      htmlFor="email"
+      className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 origin-[0]
+      peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
+      peer-focus:-translate-y-6 peer-focus:scale-75"
+    >
+      Enter your email
+    </label>
+    {formState.errors.email && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.email.message}
+      </p>
+    )}
+  </div>
+
+  
+  <div className="relative w-full mb-6">
+    {passwordValue && (
+      <button
+        type="button"
+        onClick={() => setShowpass(!showPass)}
+        className="absolute right-2 top-2 text-gray-500 hover:text-black"
       >
-        <div className="relative z-0 w-full mb-5 group my-9">
-          <input
-            type="text"
-            {...register('name')}
-            id="name"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="name"
-            className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Enter Your Name
-          </label>
-          {formState.errors.name ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.name.message}</p> : ""}
-        </div>
+        <i
+          className={`fa-solid ${
+            showPass ? "fa-eye" : "fa-eye-slash"
+          }`}
+        ></i>
+      </button>
+    )}
 
-        <div className="relative z-0 w-full mb-5 group my-9">
-          <input
-            type="email"
-             {...register('email')}
-            id="email"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="email"
-            className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Enter Your email
-          </label>
-          {formState.errors.email ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.email.message}</p> : ""}
-        </div>
+    <input
+      type={showPass ? "text" : "password"}
+      {...register("password")}
+      id="password"
+      className="block w-full py-2.5 text-sm bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:border-sky-300 peer"
+      placeholder=" "
+    />
+    <label
+      htmlFor="password"
+      className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 origin-[0]
+      peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
+      peer-focus:-translate-y-6 peer-focus:scale-75"
+    >
+      Enter your password
+    </label>
+    {formState.errors.password && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.password.message}
+      </p>
+    )}
+  </div>
 
-        <div className="relative z-0 w-full mb-5 group my-9">
-         {
-          passwordValue ?  <span onClick={()=>{setShowpass(!showPass)}}><i class={`fa-solid ${showPass ? "fa-eye":"fa-eye-slash"} absolute start-80 lg:start-100 top-2`}></i></span>  : ""
-         }
-          <input
-            type={showPass ? "text" : "password"}
-           {...register('password')}
-            id="password"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="password"
-            className="absolute text-xs text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Enter your Password
-          </label>
-          {formState.errors.password ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.password.message}</p> : ""}
-        </div>
+  
+  <div className="relative w-full mb-6">
+    <input
+      type="password"
+      {...register("rePassword")}
+      id="rePassword"
+      className="block w-full py-2.5 text-sm bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:border-sky-300 peer"
+      placeholder=" "
+    />
+    <label
+      htmlFor="rePassword"
+      className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 origin-[0]
+      peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
+      peer-focus:-translate-y-6 peer-focus:scale-75"
+    >
+      Confirm your password
+    </label>
+    {formState.errors.rePassword && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.rePassword.message}
+      </p>
+    )}
+  </div>
 
+  
+  <div className="relative w-full mb-6">
+    <input
+      type="date"
+      {...register("dateOfBirth")}
+      id="dateOfBirth"
+      className="block w-full py-2.5 text-sm bg-transparent border-0 border-b-2 border-default-medium focus:outline-none focus:border-sky-300"
+    />
+    {formState.errors.dateOfBirth && (
+      <p className="mt-2 text-center text-sm text-red-600 font-semibold">
+        {formState.errors.dateOfBirth.message}
+      </p>
+    )}
+  </div>
 
-        <div className="relative z-0 w-full mb-5 group my-9">
-          <input
-            type="password"
-           {...register('rePassword')}
-            id="rePassword"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="rePassword"
-            className="absolute text-xs text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Confirm Your Password
-          </label>
-          {formState.errors.rePassword ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.rePassword.message}</p> : ""}
-        </div>
+  
+  <fieldset className="flex gap-6 mb-6">
+    <label className="flex items-center gap-2 text-sm font-medium">
+      <input
+        type="radio"
+        {...register("gender")}
+        value="male"
+        defaultChecked
+        className="w-4 h-4 accent-sky-300"
+      />
+      Male
+    </label>
 
-        <div className="relative z-0 w-full mb-5 group my-9">
-          <input
-            type="date"
-            {...register('dateOfBirth')}
-            id="dateOfBirth"
-            className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-sky-300 peer"
-            placeholder="  "
-          />
-          <label
-            htmlFor="dateOfBirth"
-            className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-          >
-            Your Date of Birth
-          </label>
-           {formState.errors.dateOfBirth ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.dateOfBirth.message}</p> : ""}
-        </div>
+    <label className="flex items-center gap-2 text-sm font-medium">
+      <input
+        type="radio"
+        {...register("gender")}
+        value="female"
+        className="w-4 h-4 accent-pink-500"
+      />
+      Female
+    </label>
+  </fieldset>
 
-        <fieldset className="flex gap-4 py-4">
-          <div className="flex items-center mb-4">
-            <input
-              id="male"
-              type="radio"
-              {...register('gender')}
-              defaultValue="male"
-              className="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-pink-700 focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none"
-              defaultChecked
-            />
-            <label
-              htmlFor="male"
-              className="select-none ms-2 text-sm font-medium text-heading"
-            >
-              Male
-            </label>
-          </div>
-          <div className="flex items-center mb-4">
-            <input
-              id="female"
-              type="radio"
-              {...register('gender')}
-              defaultValue="female"
-              className="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border- focus:ring-2 focus:outline-none focus:ring-pink-700-subtle border border-default appearance-none"
-            />
-            <label
-              htmlFor="female"
-              className="select-none ms-2 text-sm font-medium text-heading"
-            >
-              Female
-            </label>
-             {formState.errors.gender ? <p className='text-center my-3 text-red-700 font-bold'>{formState.errors.gender.message}</p> : ""}
-          </div>
-        </fieldset>
-        <button
+  {formState.errors.gender && (
+    <p className="mb-4 text-center text-sm text-red-600 font-semibold">
+      {formState.errors.gender.message}
+    </p>
+  )}
 
-        disabled={isloading}
-          type="submit"
-          className={`text-black hover:shadow-2xl shadow-black hover:scale-120 duration-500 bg-sky-300 box-border border border-transparent hover:bg-fg-yellow-strong focus:ring-4 focus:ring-yellow  -medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-non ${isloading?"cursor-not-allowed":"cursor-pointer"}`}
-        >
-        {isloading ? <i class="fa-solid fa-spinner fa-spin"></i> : "Submit"}
-        </button>
-      </form>
+  
+  <button
+    disabled={isloading}
+    type="submit"
+    className={`w-full sm:w-auto flex items-center justify-center gap-2 bg-sky-300 text-black rounded-lg px-6 py-2.5 font-medium duration-300 hover:scale-105 hover:shadow-xl ${
+      isloading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+    }`}
+  >
+    {isloading ? (
+      <i className="fa-solid fa-spinner fa-spin"></i>
+    ) : (
+      "Submit"
+    )}
+  </button>
+</form>
   
   </>
 }

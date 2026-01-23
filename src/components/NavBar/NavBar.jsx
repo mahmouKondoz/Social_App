@@ -1,71 +1,128 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import img1 from "../../assets/pngtree-default-avatar-profile-icon-gray-placeholder-vector-png-image_16213764.png"
-import { ContextLogin } from '../../Context/ContextLogin'
-import { ContextUserInfo } from '../../Context/ContextUserInfo'
-
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import img1 from "../../assets/pngtree-default-avatar-profile-icon-gray-placeholder-vector-png-image_16213764.png";
+import { ContextLogin } from "../../Context/ContextLogin";
+import { ContextUserInfo } from "../../Context/ContextUserInfo";
 
 export default function NavBar() {
+  let { getToken, setGettoken } = useContext(ContextLogin);
+  let { data } = useContext(ContextUserInfo);
+  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
 
-  let {getToken , setGettoken} = useContext(ContextLogin)
-  let {data} = useContext(ContextUserInfo)
- 
-  return <>
+  return (
+    <>
+      <nav className="fixed top-0 left-0 z-20 w-full bg-black border-b border-slate-700 shadow-2xl shadow-slate-500">
+        <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+         
+          <Link
+            to="/"
+            className="text-sky-300 font-semibold text-3xl sm:text-4xl hover:scale-110 duration-300"
+          >
+            Social App <i className="fa-brands fa-bluesky"></i>
+          </Link>
 
- <nav className=" text-sky-300 fixed w-full z-20 top-0 start-0 border-b border-default bg-black shadow-2xl shadow-slate-500">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-      <span className="self-center  text-sky-300 font-semibold whitespace-nowrap hover:scale-115 duration-500 text-5xl hover:shadow-2xl ">Social App <i class="fa-brands fa-bluesky"></i>  </span>
-    </Link>
-    <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          {/* Right Side */}
+          <div className="flex items-center gap-4">
+            {/* Logged In */}
+            {getToken ? (
+              <div className="relative">
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="flex items-center focus:outline-none"
+                >
+                  <img
+                    className="w-9 h-9 rounded-full border border-sky-300"
+                    src={data?.photo}
+                    alt="user"
+                  />
+                </button>
 
-      {getToken ? <>
+                {/* Dropdown */}
+                {open && (
+                  <div className="absolute right-0 mt-3 w-44 bg-neutral-900 border border-slate-700 rounded-xl shadow-lg">
+                    <div className="px-4 py-3 border-b border-slate-700">
+                      <p className="text-sm font-semibold text-white">
+                        {data?.name}
+                      </p>
+                      <p className="text-xs text-gray-400 truncate">
+                        {data?.email}
+                      </p>
+                    </div>
 
-      <button type="button" className="flex text-sm bg-neutral-primary rounded-full md:me-0 focus:ring-4 focus:ring-neutral-tertiary" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-        <span className="sr-only">Open user menu</span>
-        <img className="w-8 h-8 rounded-full" src={data?.photo} alt="user photo" />
-      </button> 
-      
-       <div className="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44" id="user-dropdown">
-        
-        <div className="px-4 py-3 text-sm border-b border-default">
-          <span className="block text-heading font-medium">{data?.name}</span>
-          <span className="block text-body truncate">{data?.email}</span>
+                    <ul className="p-2 text-sm text-gray-300">
+                      <li>
+                        <Link
+                          to="/profile"
+                          className="block px-3 py-2 rounded-lg hover:bg-slate-700"
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/login"
+                          onClick={() => {
+                            localStorage.removeItem("userToken");
+                            setGettoken("");
+                          }}
+                          className="block px-3 py-2 rounded-lg hover:bg-slate-700"
+                        >
+                          Sign out
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Not Logged In */
+              <ul className="hidden sm:flex gap-6 text-sky-300 font-medium">
+                <li>
+                  <Link to="/login" className="hover:text-white duration-300">
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    className="hover:text-white duration-300"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            )}
+
+            {!getToken && (
+              <button
+                className="sm:hidden text-sky-300 text-2xl"
+                onClick={() => setMenu(!menu)}
+              >
+                ☰
+              </button>
+            )}
+          </div>
         </div>
-        <ul className="p-2 text-sm text-body font-medium" aria-labelledby="user-menu-button">
-          <li>
-            <Link to="profile" className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Profile</Link>
-          </li>
-          <li>
-            <Link to="login" onClick={()=>{
-              localStorage.removeItem('userToken')
-              setGettoken('')
 
-            }} className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign out</Link>
-          </li>
-        </ul>
-      </div>
-      
-      
-      </> :
-      <ul className='flex flex-col lg:flex-row gap-4 ms-5'>
-          <li><Link to="login"  >Login</Link></li>
-            <li><Link to="Register"  >Register</Link></li>
-        </ul>
-      }
-     
-      
-      
-      
-      
-      
-
-    </div>
-   
-  </div>
-</nav>
-
-      
-  
-  </>
+        
+        {!getToken && menu && (
+          <div className="sm:hidden bg-black border-t border-slate-700 px-4 py-3">
+            <ul className="flex flex-col gap-3 text-sky-300">
+              <li>
+                <Link to="/login" onClick={() => setMenu(false)}>
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" onClick={() => setMenu(false)}>
+                  Register
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
+    </>
+  );
 }
