@@ -48,7 +48,7 @@ export default function NavBar() {
       
       
       </> :
-      <ul className='flex gap-4 ms-5'>
+      <ul className='flex flex-col lg:flex-row gap-4 ms-5'>
           <li><Link to="login"  >Login</Link></li>
             <li><Link to="Register"  >Register</Link></li>
         </ul>

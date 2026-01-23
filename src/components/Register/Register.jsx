@@ -112,9 +112,9 @@ let {register,handleSubmit,formState} = form
   return <>
 
   
-    <form
+    <form 
      onSubmit={handleSubmit(hangelRegister)}
-        className="max-w-md  mx-auto "
+        className="max-w-md  mx-auto p-10 lg:p-0 "
       >
         <div className="relative z-0 w-full mb-5 group my-9">
           <input

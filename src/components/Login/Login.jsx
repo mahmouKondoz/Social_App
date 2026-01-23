@@ -98,7 +98,7 @@ let {register,handleSubmit,formState} = form
   
     <form
      onSubmit={handleSubmit(hangelRegister)}
-        className="max-w-md  mx-auto "
+        className="max-w-md  mx-auto p-10 lg:p-0 "
       >
        
 
