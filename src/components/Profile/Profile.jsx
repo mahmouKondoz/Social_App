@@ -52,63 +52,61 @@ export default function Profile() {
   return<div>
 
 
-    <div className='w-[50%] mx-auto mb-7 relative shadow-2xl shadow-black p-7 rounded-4xl '>
-       <div className='absolute end-5 flex gap-2 items-center '>
-           <DeletePost id={post?.id}/>
-           <UpdatePost post ={post}/>
-          </div>
-        
-        
-        
-        <div className='flex gap-3 items-center'>
-        <div>
-          <img className='size-13 rounded-full ' src={post.user.photo} alt=''></img>
-        </div>
-        <div>
-          <div>
-            <p className='font-bold'>{post.user.name}</p>
-            <p className='text-sm'>{new Date(post.createdAt).toLocaleDateString('en-us' , {
-              year:'numeric' ,
-              month:"short" ,
-              day:"numeric"
-            }) }</p>
-          </div>
-        </div>
-      </div>
-        
-        
-       
-        <div className='my-3 ms-3'>{post.body}</div>
-        <Link to={`/singlepost/${post.id}`}>
+    <div className="w-full sm:w-[90%] md:w-[75%] lg:w-[50%] mx-auto mb-7 relative shadow-2xl shadow-black p-4 sm:p-6 lg:p-7 rounded-3xl">
+  <div className="absolute end-3 top-3 flex gap-2 items-center">
+    <DeletePost id={post?.id} />
+    <UpdatePost post={post} />
+  </div>
 
-        <img className='w-full rounded-3xl' src = {post.image} alt='' ></img>
-        </Link>
-
-        {/* <div>
-          <SingComment id = {post?.id}/>
-        </div>
-       */}
-
-      <div className='flex justify-between  shadow-2xl rounded-3xl  my-5'> 
-        <div className='flex cursor-pointer items-center gap-2 hover:bg-gray-300 rounded-3xl p-5 duration-500'>
-         
-          <AiFillLike size={25} />
-           <p className='text-sm'>Like</p>
-        </div>
-        <div className='flex cursor-pointer items-center gap-2  hover:bg-gray-300 rounded-3xl p-5 duration-500'>
-           
-          <FaComment size={25} />
-          <p className='text-sm'>Comment</p>
-        </div>
-        <div className='flex cursor-pointer items-center gap-2  hover:bg-gray-300 rounded-3xl p-5 duration-500'>
-          
-          <FaShare size={25} />
-          <p className='text-sm'>Share</p>
-
-        </div>
-      </div>
-
+  <div className="flex gap-3 items-center">
+    <img
+      className="size-10 sm:size-12 rounded-full"
+      src={post?.user?.photo}
+      alt=""
+    />
+    <div>
+      <p className="font-bold text-sm sm:text-base">
+        {post?.user?.name}
+      </p>
+      <p className="text-xs sm:text-sm">
+        {new Date(post?.createdAt).toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </p>
     </div>
+  </div>
+
+  <div className="my-3 ms-1 sm:ms-3 text-sm sm:text-base">
+    {post?.body}
+  </div>
+
+  <Link to={`/singlepost/${post?.id}`}>
+    <img
+      className="w-full rounded-2xl sm:rounded-3xl max-h-[400px] object-cover"
+      src={post?.image}
+      alt=""
+    />
+  </Link>
+
+  <div className="flex justify-between shadow-xl rounded-2xl my-4 sm:my-5">
+    <div className="flex cursor-pointer items-center gap-1 sm:gap-2 hover:bg-gray-300 rounded-2xl p-3 sm:p-5 duration-300">
+      <AiFillLike size={20} />
+      <p className="text-xs sm:text-sm">Like</p>
+    </div>
+
+    <div className="flex cursor-pointer items-center gap-1 sm:gap-2 hover:bg-gray-300 rounded-2xl p-3 sm:p-5 duration-300">
+      <FaComment size={20} />
+      <p className="text-xs sm:text-sm">Comment</p>
+    </div>
+
+    <div className="flex cursor-pointer items-center gap-1 sm:gap-2 hover:bg-gray-300 rounded-2xl p-3 sm:p-5 duration-300">
+      <FaShare size={20} />
+      <p className="text-xs sm:text-sm">Share</p>
+    </div>
+  </div>
+</div>
 
 
 

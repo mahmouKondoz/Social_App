@@ -89,57 +89,57 @@ let {handleSubmit} = useForm()
 
 {isPending && toast ('loading.....')}
 <form onSubmit={handleSubmit(handleFormData)} className='mx-auto w-[50%]'>
-  <div className="w-full mb-4  border border-default-medium rounded-base bg-neutral-secondary-medium shadow-xs">
-    <div className="flex items-center justify-between px-3 py-2 border-b border-default-medium">
-      <div className="flex flex-wrap items-center divide-default-medium sm:divide-x sm:rtl:divide-x-reverse">
-        <div className="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
+  <div className="w-full mb-4 border border-default-medium rounded-base bg-neutral-secondary-medium shadow-xs">
+  <div className="flex flex-wrap items-center justify-between px-3 py-2 border-b border-default-medium gap-2">
+    <input
+      onChange={handleImg}
+      type="file"
+      id="image"
+      className="swal2-file rounded-xl text-xs sm:text-sm w-full sm:w-auto"
+    />
+  </div>
 
-         
-         
-        <input onChange={handleImg}  type="file" id="image" class="swal2-file rounded-2xl " />
-         
-        </div>
-        
-      </div>
-    </div>
-    <div className="px-4 py-2 relative bg-neutral-secondary-medium rounded-b-base">
-      <label htmlFor="editor" className="sr-only">Publish post</label>
-
-
-      <textarea id="editor" rows={2} className="block w-full px-0 text-sm text-heading bg-neutral-secondary-medium border-0 focus:ring-0 placeholder:text-body" placeholder="What is in your mind..." required 
+  <div className="px-3 sm:px-4 py-2 relative bg-neutral-secondary-medium rounded-b-base">
+    <textarea
+      rows={2}
+      className="block w-full px-0 text-sm sm:text-base text-heading bg-neutral-secondary-medium border-0 focus:ring-0 placeholder:text-body resize-none"
+      placeholder="What is in your mind..."
+      required
       value={body}
-      
-      onChange={(e)=>{setBody(e.target.value)}}
-      
-      
-      />
+      onChange={(e) => setBody(e.target.value)}
+    />
 
+    {imgSrc && (
+      <div className="relative mt-3 w-fit">
+        <img
+          className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-2xl"
+          src={imgSrc}
+          alt=""
+        />
+        <span
+          onClick={() => setImgSrc(null)}
+          className="absolute -top-2 -end-2 cursor-pointer bg-black text-white rounded-full w-6 h-6 flex items-center justify-center"
+        >
+          <i className="fa-solid fa-xmark text-xs"></i>
+        </span>
+      </div>
+    )}
 
-        {<>
-
-        {imgSrc && <div className='relative '>
-          
-          <img className='size-30 rounded-2xl ' src={imgSrc}></img>
-         <span  onClick={()=>{
-          setImgSrc(null)
-         }} className='absolute -top-3 start-28 cursor-pointer '> <i class="fa-solid fa-xmark"></i></span>
-          
-          </div>}
-        
-        
-        
-        </>
-        }
-
-
-        <button type="submit" className=" absolute end-2 top-3 text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Publish post</button>
+    <div className="flex justify-end mt-3">
+      <button
+        type="submit"
+        className="text-white bg-brand hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium rounded-base text-xs sm:text-sm px-3 sm:px-4 py-2 focus:outline-none"
+      >
+        Publish post
+      </button>
     </div>
   </div>
+</div>
 
 </form>
 
 
-\
+
   
   
   
